@@ -1,11 +1,12 @@
 using Cysharp.Threading.Tasks;
 using Game.Codebase.Infrastructure.States.Factory;
+using Game.Codebase.Infrastructure.States.GameStates;
 using Game.Codebase.Infrastructure.States.StateInfrastructure;
 using VContainer.Unity;
 
 namespace Game.Codebase.Infrastructure.States.StateMachine
 {
-    public class GameStateMachine : IGameStateMachine, ITickable
+    public class GameStateMachine : IGameStateMachine, IStartable, ITickable
     {
         private IExitableState _activeState;
         private readonly IStateFactory _stateFactory;
@@ -13,6 +14,11 @@ namespace Game.Codebase.Infrastructure.States.StateMachine
         public GameStateMachine(IStateFactory stateFactory)
         {
             _stateFactory = stateFactory;
+        }
+
+        public void Start()
+        {
+            Enter<BootstrapState>().Forget();
         }
 
         public void Tick()
@@ -31,7 +37,7 @@ namespace Game.Codebase.Infrastructure.States.StateMachine
 
         public async UniTaskVoid Enter<TState, TPayload>(TPayload payload) where TState : class, IPayloadState<TPayload>
         {
-            TState state = await ChangeState<TState>();
+            var state = await ChangeState<TState>();
             state.Enter(payload);
         }
 
@@ -42,7 +48,7 @@ namespace Game.Codebase.Infrastructure.States.StateMachine
                 await _activeState.Exit();
             }
 
-            TState state = _stateFactory.GetState<TState>();
+            var state = _stateFactory.GetState<TState>();
             _activeState = state;
 
             return state;

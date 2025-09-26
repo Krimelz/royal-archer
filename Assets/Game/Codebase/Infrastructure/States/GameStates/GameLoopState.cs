@@ -3,10 +3,12 @@ using Game.Codebase.Infrastructure.Common.Fader;
 using Game.Codebase.Infrastructure.Loading;
 using Game.Codebase.Infrastructure.States.StateInfrastructure;
 using Game.Codebase.Morpeh.Features.Characters;
+using Game.Codebase.Morpeh.Features.Common;
 using Game.Codebase.Morpeh.Features.Destroy;
 using Game.Codebase.Morpeh.Features.Inputs;
 using Game.Codebase.Morpeh.Features.Movement;
 using Game.Codebase.Morpeh.Features.Triggers;
+using Scellecs.Morpeh;
 using Scellecs.Morpeh.Elysium;
 using UnityEngine;
 using VContainer.Unity;
@@ -30,25 +32,25 @@ namespace Game.Codebase.Infrastructure.States.GameStates
             _sceneLoader = sceneLoader;
         }
 
-        public void Enter()
+        public async void Enter()
         {
-            _sceneLoader.Load(GAME_SCENE, () =>
-            {
-                _startup = new EcsStartup(new VContainerResolver(_scope));
+            await _sceneLoader.Load(GAME_SCENE);
 
-                _startup
-                    .AddSystemsGroup()
-                    .AddFeatureInjected<InputFeature>()
-                    .AddFeatureInjected<TriggerFeature>()
-                    .AddFeatureInjected<CharacterFeature>()
-                    .AddFeatureInjected<MovementFeature>()
-                    .AddFeatureInjected<DestroyFeature>()
-                    ;
+            _startup = new EcsStartup(new VContainerResolver(_scope));
 
-                _startup.Initialize(false);
+            _startup
+                .AddSystemsGroup()
+                .AddFeatureInjected<InputFeature>()
+                .AddFeatureInjected<CommonFeature>()
+                .AddFeatureInjected<TriggerFeature>()
+                .AddFeatureInjected<CharacterFeature>()
+                .AddFeatureInjected<MovementFeature>()
+                .AddFeatureInjected<DestroyFeature>()
+                ;
 
-                _fadeService.Out();
-            });
+            _startup.Initialize(false);
+
+            await _fadeService.Out();
         }
 
         public void Update()

@@ -23,15 +23,6 @@ namespace Game.Codebase.Infrastructure.Scopes
             RegisterStateMachine(builder);
             RegisterStateFactory(builder);
             RegisterGameStates(builder);
-            
-            Debug.Log("Root LifetimeScope Initialized");
-        }
-
-        protected override void Awake()
-        {
-            base.Awake();
-
-            Container.Resolve<IGameStateMachine>().Enter<BootstrapState>();
         }
 
         private void RegisterInputService(IContainerBuilder builder)
@@ -49,7 +40,7 @@ namespace Game.Codebase.Infrastructure.Scopes
 
         private void RegisterStateMachine(IContainerBuilder builder)
         {
-            builder.Register<IGameStateMachine, GameStateMachine>(Lifetime.Singleton);
+            builder.RegisterEntryPoint<GameStateMachine>().As<IGameStateMachine>();
         }
 
         private void RegisterStateFactory(IContainerBuilder builder)

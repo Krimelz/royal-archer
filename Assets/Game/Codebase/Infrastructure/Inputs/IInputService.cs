@@ -9,5 +9,7 @@ namespace Game.Codebase.Infrastructure.Inputs
         public Vector2 Axis { get; }
         public bool Escape { get; }
         public bool Move { get; }
+        public bool Action { get; }
+        public Vector2 Pointer { get; }
     }
 }

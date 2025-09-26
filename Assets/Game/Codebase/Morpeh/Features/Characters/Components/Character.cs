@@ -1,6 +1,7 @@
 ﻿using System;
 using Scellecs.Morpeh;
 using Unity.IL2CPP.CompilerServices;
+using UnityEngine;
 
 namespace Game.Codebase.Morpeh.Features.Characters.Components
 {
@@ -10,5 +11,6 @@ namespace Game.Codebase.Morpeh.Features.Characters.Components
     [Il2CppSetOption(Option.DivideByZeroChecks, false)]
     public struct Character : IComponent
     {
+        public GameObject Bow;
     }
 }

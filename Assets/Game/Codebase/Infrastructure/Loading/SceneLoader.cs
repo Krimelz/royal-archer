@@ -6,9 +6,9 @@ namespace Game.Codebase.Infrastructure.Loading
 {
     public class SceneLoader : ISceneLoader
     {
-        public async UniTaskVoid Load(string name, Action onLoaded = null)
+        public async UniTask Load(string name)
         {
-            await SceneManager.LoadSceneAsync(name).ToUniTask().ContinueWith(() => onLoaded?.Invoke());
+            await SceneManager.LoadSceneAsync(name).ToUniTask();
         }
     }
 }

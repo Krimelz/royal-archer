@@ -16,6 +16,8 @@ namespace Game.Codebase.Morpeh.Features.Inputs.Systems
         private Stash<InputAxis> _inputAxises;
         private Stash<InputMove> _inputMoves;
         private Stash<InputEscape> _inputEscapes;
+        private Stash<InputAction> _inputActions;
+        private Stash<InputPointer> _inputPointers;
 
         private Filter _filter;
 
@@ -30,12 +32,11 @@ namespace Game.Codebase.Morpeh.Features.Inputs.Systems
 
         public void OnAwake()
         {
-            _inputAxises = World
-                .GetStash<InputAxis>();
-            _inputMoves = World
-                .GetStash<InputMove>();
-            _inputEscapes = World
-                .GetStash<InputEscape>();
+            _inputAxises = World.GetStash<InputAxis>();
+            _inputMoves = World.GetStash<InputMove>();
+            _inputEscapes = World.GetStash<InputEscape>();
+            _inputActions = World.GetStash<InputAction>();
+            _inputPointers = World.GetStash<InputPointer>();
 
             _filter = World.Filter
                 .With<Input>()
@@ -47,6 +48,8 @@ namespace Game.Codebase.Morpeh.Features.Inputs.Systems
             _inputAxises.RemoveAll();
             _inputMoves.RemoveAll();
             _inputEscapes.RemoveAll();
+            _inputActions.RemoveAll();
+            _inputPointers.RemoveAll();
 
             foreach (var inputEntity in _filter)
             {
@@ -60,13 +63,23 @@ namespace Game.Codebase.Morpeh.Features.Inputs.Systems
 
                 if (_inputService.Move)
                 {
-                    _inputMoves.Set(inputEntity, new InputMove());
+                    _inputMoves.Set(inputEntity);
                 }
 
                 if (_inputService.Escape)
                 {
-                    _inputEscapes.Set(inputEntity, new InputEscape());
+                    _inputEscapes.Set(inputEntity);
                 }
+
+                if (_inputService.Action)
+                {
+                    _inputActions.Set(inputEntity);
+                }
+                
+                _inputPointers.Set(inputEntity, new InputPointer
+                {
+                    Position = _inputService.Pointer,
+                });
             }
         }
 

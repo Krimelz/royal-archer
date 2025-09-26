@@ -36,7 +36,7 @@ namespace Game.Codebase.Morpeh.Features.Triggers.Systems
 
             _inputFilter = World.Filter
                 .With<Input>()
-                .With<InputEscape>()
+                .With<InputAction>()
                 .Build();
             _activeTriggerFilter = World.Filter
                 .With<Trigger>()
@@ -52,7 +52,7 @@ namespace Game.Codebase.Morpeh.Features.Triggers.Systems
                 {
                     ref var trigger = ref _triggers.Get(activeTriggerEntity);
 
-                    switch (trigger.Value)
+                    switch (trigger.Type)
                     {
                         case TriggerType.Transition:
                             UnityEngine.Debug.Log($"Transition trigger {activeTriggerEntity.Id} activated!");
@@ -60,8 +60,6 @@ namespace Game.Codebase.Morpeh.Features.Triggers.Systems
                             break;
                         case TriggerType.Item:
                             UnityEngine.Debug.Log($"Item trigger {activeTriggerEntity.Id} activated!");
-                            break;
-                        default:
                             break;
                     }
                 }

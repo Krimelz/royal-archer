@@ -8,7 +8,7 @@ namespace Game.Codebase.Morpeh.Features.Characters
         public void Configure(EcsStartup.FeatureBuilder builder)
         {
             builder
-                .AddUpdateSystemInjected<SetCharacterMovementDirectionByInputSystem>()
+                .AddUpdateSystemInjected<SetCharacterBowDirectionByInputSystem>()
                 ;
         }
     }

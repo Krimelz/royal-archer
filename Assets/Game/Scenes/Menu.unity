@@ -301,8 +301,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b8417333911c16241a90eb9b01567abc, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Offset: {x: 5, y: 5, z: 5}
-  Camera: {fileID: 330585545}
+  serializedData:
+    Value: {fileID: 330585545}
 --- !u!1 &410087039
 GameObject:
   m_ObjectHideFlags: 0

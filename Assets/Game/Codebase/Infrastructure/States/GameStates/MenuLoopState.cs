@@ -18,9 +18,10 @@ namespace Game.Codebase.Infrastructure.States.GameStates
             _fadeService = fadeService;
         }
 
-        public void Enter()
+        public async void Enter()
         {
-            _sceneLoader.Load(MENU_SCENE, async () => await _fadeService.Out());
+            await _sceneLoader.Load(MENU_SCENE);
+            await _fadeService.Out();
         }
 
         public async UniTask Exit()
