@@ -12,7 +12,7 @@ using VContainer.Unity;
 
 namespace Game.Codebase.Infrastructure.Scopes
 {
-    public class BootLifetimeScope : LifetimeScope
+    public class RootLifetimeScope : LifetimeScope
     {
         [SerializeField] private FadeService _fader;
         
@@ -23,6 +23,8 @@ namespace Game.Codebase.Infrastructure.Scopes
             RegisterStateMachine(builder);
             RegisterStateFactory(builder);
             RegisterGameStates(builder);
+            
+            Debug.Log("Root LifetimeScope Initialized");
         }
 
         protected override void Awake()
