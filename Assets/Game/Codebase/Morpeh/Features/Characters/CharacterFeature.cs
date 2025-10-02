@@ -1,5 +1,5 @@
-﻿using Scellecs.Morpeh.Elysium;
-using Game.Codebase.Morpeh.Features.Characters.Systems;
+﻿using Game.Codebase.Morpeh.Features.Characters.Systems;
+using Scellecs.Morpeh.Elysium;
 
 namespace Game.Codebase.Morpeh.Features.Characters
 {
@@ -8,7 +8,8 @@ namespace Game.Codebase.Morpeh.Features.Characters
         public void Configure(EcsStartup.FeatureBuilder builder)
         {
             builder
-                .AddUpdateSystemInjected<SetCharacterBowDirectionByInputSystem>()
+                .AddUpdateSystemInjected<SetCharacterSpeedByInput>()
+                .AddUpdateSystemInjected<SetCharacterDirectionByInput>()
                 ;
         }
     }

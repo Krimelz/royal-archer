@@ -1,31 +1,31 @@
-﻿using Game.Codebase.Morpeh.Features.Characters.Components;
-using Game.Codebase.Morpeh.Features.Inputs.Components;
+using Game.Codebase.Morpeh.Features.Characters.Components;
 using Game.Codebase.Morpeh.Features.Movement.Components;
 using Scellecs.Morpeh;
 using Scellecs.Morpeh.Elysium;
 using Unity.IL2CPP.CompilerServices;
 using UnityEngine;
 using Input = Game.Codebase.Morpeh.Features.Inputs.Components.Input;
+using InputAxis = Game.Codebase.Morpeh.Features.Inputs.Components.InputAxis;
 
 namespace Game.Codebase.Morpeh.Features.Characters.Systems
 {
     [Il2CppSetOption(Option.NullChecks, false)]
     [Il2CppSetOption(Option.ArrayBoundsChecks, false)]
     [Il2CppSetOption(Option.DivideByZeroChecks, false)]
-    public class SetCharacterBowDirectionByInputSystem : IUpdateSystem
+    public class SetCharacterDirectionByInput : IUpdateSystem
     {
-        private Stash<Character> _characters;
         private Stash<InputAxis> _inputAxises;
-
+        private Stash<MovementDirection> _directions;
+        
         private Filter _inputFilter;
         private Filter _characterFilter;
-
+        
         public World World { get; set; }
-
+        
         public void OnAwake()
         {
-            _characters = World.GetStash<Character>();
             _inputAxises = World.GetStash<InputAxis>();
+            _directions = World.GetStash<MovementDirection>();
 
             _inputFilter = World.Filter
                 .With<Input>()
@@ -42,14 +42,16 @@ namespace Game.Codebase.Morpeh.Features.Characters.Systems
             {
                 foreach (var characterEntity in _characterFilter)
                 {
-                    ref var axis = ref _inputAxises.Get(inputEntity, out var exist);
-                    ref var character = ref _characters.Get(characterEntity);
+                    ref var axis = ref _inputAxises.Get(inputEntity);
                     
-                    character.Bow.transform.Rotate(new Vector3(0, 0, axis.Value.y * deltaTime * 5f));
+                    _directions.Set(characterEntity, new MovementDirection
+                    {
+                        Value = new Vector3(axis.Value.x, 0f, axis.Value.y).normalized,
+                    });
                 }
             }
         }
-
+        
         public void Dispose()
         {
             _inputFilter = null;

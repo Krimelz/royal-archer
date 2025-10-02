@@ -9,7 +9,6 @@ namespace Game.Codebase.Morpeh.Features.Movement
         {
             builder
                 .AddUpdateSystemInjected<UpdatePositionsSystem>()
-                .AddUpdateSystemInjected<SetTransformPositionSystem>()
                 ;
         }
     }

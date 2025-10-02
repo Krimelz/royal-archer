@@ -41,10 +41,10 @@ namespace Game.Codebase.Infrastructure.States.GameStates
             _startup
                 .AddSystemsGroup()
                 .AddFeatureInjected<InputFeature>()
-                .AddFeatureInjected<CommonFeature>()
-                .AddFeatureInjected<TriggerFeature>()
                 .AddFeatureInjected<CharacterFeature>()
                 .AddFeatureInjected<MovementFeature>()
+                .AddFeatureInjected<TriggerFeature>()
+                .AddFeatureInjected<CommonFeature>()
                 .AddFeatureInjected<DestroyFeature>()
                 ;
 

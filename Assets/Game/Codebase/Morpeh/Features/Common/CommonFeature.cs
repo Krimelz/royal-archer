@@ -7,9 +7,9 @@ namespace Game.Codebase.Morpeh.Features.Common
     {
         public void Configure(EcsStartup.FeatureBuilder builder)
         {
-            // builder
-            //     .AddUpdateSystemInjected<SetTransformPositionSystem>()
-            //     ;
+            builder
+                 .AddUpdateSystemInjected<SetTransformPositionSystem>()
+                 ;
         }
     }
 }
