@@ -1,6 +1,4 @@
-using Game.Codebase.Infrastructure.Common.Collisions;
-using Game.Codebase.Infrastructure.Common.Fader;
-using Game.Codebase.Infrastructure.Common.Physics;
+using Game.Codebase.Infrastructure.Fader;
 using Game.Codebase.Infrastructure.Inputs;
 using Game.Codebase.Infrastructure.Loading;
 using Game.Codebase.Infrastructure.States.Factory;
@@ -32,8 +30,6 @@ namespace Game.Codebase.Infrastructure.Scopes
 
         private void RegisterCommonServices(IContainerBuilder builder)
         {
-            builder.Register<ICollisionRegistry, CollisionRegistry>(Lifetime.Singleton);
-            builder.Register<IPhysicsService, PhysicsService>(Lifetime.Singleton);
             builder.Register<ISceneLoader, SceneLoader>(Lifetime.Singleton);
             builder.RegisterComponentInNewPrefab(_fader, Lifetime.Singleton).DontDestroyOnLoad().As<IFadeService>();
         }

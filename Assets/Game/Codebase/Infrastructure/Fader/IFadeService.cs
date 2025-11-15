@@ -1,6 +1,6 @@
 using Cysharp.Threading.Tasks;
 
-namespace Game.Codebase.Infrastructure.Common.Fader
+namespace Game.Codebase.Infrastructure.Fader
 {
     public interface IFadeService
     {

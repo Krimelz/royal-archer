@@ -14,6 +14,7 @@ namespace Game.Codebase.Morpeh.Features.Characters.Systems
     {
         private Stash<InputAxis> _inputAxises;
         private Stash<Speed> _speeds;
+        private Stash<Character> _characters;
         
         private Filter _inputFilter;
         private Filter _characterFilter;
@@ -24,6 +25,7 @@ namespace Game.Codebase.Morpeh.Features.Characters.Systems
         {
             _inputAxises = World.GetStash<InputAxis>();
             _speeds = World.GetStash<Speed>();
+            _characters = World.GetStash<Character>();
 
             _inputFilter = World.Filter
                 .With<Input>()
@@ -40,10 +42,11 @@ namespace Game.Codebase.Morpeh.Features.Characters.Systems
                 foreach (var characterEntity in _characterFilter)
                 {
                     ref var speed = ref _speeds.Get(characterEntity);
+                    ref var character = ref _characters.Get(characterEntity);
                     
                     _inputAxises.Get(inputEntity, out var exist);
                     
-                    speed.Value = exist ? 1f : 0f;
+                    speed.Value = exist ? character.Config.Speed : 0f;
                 }
             }
         }

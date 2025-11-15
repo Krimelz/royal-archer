@@ -1,5 +1,4 @@
 ﻿using Scellecs.Morpeh.Elysium;
-using Game.Codebase.Morpeh.Features.Triggers.Systems;
 
 namespace Game.Codebase.Morpeh.Features.Triggers
 {
@@ -7,12 +6,6 @@ namespace Game.Codebase.Morpeh.Features.Triggers
     {
         public void Configure(EcsStartup.FeatureBuilder builder)
         {
-            builder
-                .AddFixedSystemInjected<ActivateTriggerSystem>()
-                .AddFixedSystemInjected<SetTriggerSpriteStateSystem>()
-                .AddUpdateSystemInjected<InteractWithTriggerSystem>()
-                .AddFixedSystemInjected<DisableAllTriggersSystem>()
-                ;
         }
     }
 }

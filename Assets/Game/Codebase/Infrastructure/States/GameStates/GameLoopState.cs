@@ -1,5 +1,5 @@
 using Cysharp.Threading.Tasks;
-using Game.Codebase.Infrastructure.Common.Fader;
+using Game.Codebase.Infrastructure.Fader;
 using Game.Codebase.Infrastructure.Loading;
 using Game.Codebase.Infrastructure.States.StateInfrastructure;
 using Game.Codebase.Morpeh.Features.Characters;
@@ -8,14 +8,13 @@ using Game.Codebase.Morpeh.Features.Destroy;
 using Game.Codebase.Morpeh.Features.Inputs;
 using Game.Codebase.Morpeh.Features.Movement;
 using Game.Codebase.Morpeh.Features.Triggers;
-using Scellecs.Morpeh;
 using Scellecs.Morpeh.Elysium;
 using UnityEngine;
 using VContainer.Unity;
 
 namespace Game.Codebase.Infrastructure.States.GameStates
 {
-    public class GameLoopState : IState, IUpdateable
+    public class GameLoopState : IState, IUpdateable, IFixedUpdatable
     {
         private const string GAME_SCENE = "Game";
 
@@ -56,6 +55,11 @@ namespace Game.Codebase.Infrastructure.States.GameStates
         public void Update()
         {
             _startup?.Update(Time.deltaTime);
+        }
+
+        public void FixedUpdate()
+        {
+            _startup?.FixedUpdate(Time.fixedDeltaTime);
         }
 
         public async UniTask Exit()

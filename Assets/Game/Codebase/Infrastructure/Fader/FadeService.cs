@@ -3,7 +3,7 @@ using LitMotion;
 using LitMotion.Extensions;
 using UnityEngine;
 
-namespace Game.Codebase.Infrastructure.Common.Fader
+namespace Game.Codebase.Infrastructure.Fader
 {
     public class FadeService : MonoBehaviour, IFadeService
     {

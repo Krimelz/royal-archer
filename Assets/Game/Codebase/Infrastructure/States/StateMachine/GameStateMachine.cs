@@ -6,7 +6,7 @@ using VContainer.Unity;
 
 namespace Game.Codebase.Infrastructure.States.StateMachine
 {
-    public class GameStateMachine : IGameStateMachine, IStartable, ITickable
+    public class GameStateMachine : IGameStateMachine, IStartable, ITickable, IFixedTickable
     {
         private IExitableState _activeState;
         private readonly IStateFactory _stateFactory;
@@ -26,6 +26,14 @@ namespace Game.Codebase.Infrastructure.States.StateMachine
             if (_activeState is IUpdateable updateableState)
             {
                 updateableState.Update();
+            }
+        }
+
+        public void FixedTick()
+        {
+            if (_activeState is IFixedUpdatable fixedUpdatableState)
+            {
+                fixedUpdatableState.FixedUpdate();
             }
         }
 

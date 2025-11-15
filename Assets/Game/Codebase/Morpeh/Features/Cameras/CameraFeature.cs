@@ -1,7 +1,7 @@
-using Game.Codebase.Morpeh.Features.CameraFollow.Systems;
+using Game.Codebase.Morpeh.Features.Cameras.Systems;
 using Scellecs.Morpeh.Elysium;
 
-namespace Game.Codebase.Morpeh.Features.CameraFollow
+namespace Game.Codebase.Morpeh.Features.Cameras
 {
     public class CameraFeature : IEcsFeature
     {

@@ -33,6 +33,7 @@ namespace Game.Codebase.Morpeh.Features.Movement.Systems
                 .With<MovementDirection>()
                 .With<Speed>()
                 .With<Transform>()
+                .Without<Rigidbody>()
                 .Build();
         }
 
@@ -45,7 +46,7 @@ namespace Game.Codebase.Morpeh.Features.Movement.Systems
                 ref var speed = ref _speeds.Get(entity);
                 ref var transform = ref _transforms.Get(entity);
 
-                position.Value += transform.Value.TransformDirection(direction.Value) * speed.Value * deltaTime;
+                position.Value += deltaTime * speed.Value * transform.Value.TransformDirection(direction.Value);
             }
         }
 

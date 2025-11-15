@@ -1,5 +1,5 @@
+using Game.Codebase.Infrastructure.Fader;
 using Cysharp.Threading.Tasks;
-using Game.Codebase.Infrastructure.Common.Fader;
 using Game.Codebase.Infrastructure.Loading;
 using Game.Codebase.Infrastructure.States.StateInfrastructure;
 

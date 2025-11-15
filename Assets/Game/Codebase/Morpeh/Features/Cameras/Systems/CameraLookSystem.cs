@@ -1,10 +1,10 @@
-using Game.Codebase.Morpeh.Features.CameraFollow.Components;
+using Game.Codebase.Morpeh.Features.Cameras.Components;
 using Game.Codebase.Morpeh.Features.Characters.Components;
 using Game.Codebase.Morpeh.Features.Common.Components;
 using Scellecs.Morpeh;
 using Unity.IL2CPP.CompilerServices;
 
-namespace Game.Codebase.Morpeh.Features.CameraFollow.Systems
+namespace Game.Codebase.Morpeh.Features.Cameras.Systems
 {
     [Il2CppSetOption(Option.NullChecks, false)]
     [Il2CppSetOption(Option.ArrayBoundsChecks, false)]
@@ -21,10 +21,8 @@ namespace Game.Codebase.Morpeh.Features.CameraFollow.Systems
 
         public void OnAwake()
         {
-            _cameras = World
-                .GetStash<MainCamera>();
-            _positions = World
-                .GetStash<Position>();
+            _cameras = World.GetStash<MainCamera>();
+            _positions = World.GetStash<Position>();
 
             _cameraFilter = World.Filter
                 .With<MainCamera>()
@@ -38,10 +36,9 @@ namespace Game.Codebase.Morpeh.Features.CameraFollow.Systems
         {
             foreach (var cameraEntity in _cameraFilter)
             {
-                ref var camera = ref _cameras.Get(cameraEntity);
-
                 foreach (var characterEntity in _characterFilter)
                 {
+                    ref var camera = ref _cameras.Get(cameraEntity);
                     ref var characterPosition = ref _positions.Get(characterEntity);
 
                     camera.Value.transform.LookAt(characterPosition.Value);

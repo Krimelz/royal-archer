@@ -9,6 +9,7 @@ namespace Game.Codebase.Morpeh.Features.Common
         {
             builder
                  .AddUpdateSystemInjected<SetTransformPositionSystem>()
+                 .AddFixedSystemInjected<SetRigidbodyVelocitySystem>()
                  ;
         }
     }

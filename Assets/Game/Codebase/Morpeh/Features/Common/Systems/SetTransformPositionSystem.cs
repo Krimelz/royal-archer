@@ -19,10 +19,8 @@ namespace Game.Codebase.Morpeh.Features.Common.Systems
 
         public void OnAwake()
         {
-            _transfroms = World
-                .GetStash<Transform>();
-            _positions = World
-                .GetStash<Position>();
+            _transfroms = World.GetStash<Transform>();
+            _positions = World.GetStash<Position>();
 
             _transformsFilter = World.Filter
                 .With<Transform>()

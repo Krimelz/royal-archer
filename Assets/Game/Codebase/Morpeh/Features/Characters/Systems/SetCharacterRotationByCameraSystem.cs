@@ -1,4 +1,4 @@
-using Game.Codebase.Morpeh.Features.CameraFollow.Components;
+using Game.Codebase.Morpeh.Features.Cameras.Components;
 using Game.Codebase.Morpeh.Features.Characters.Components;
 using Scellecs.Morpeh;
 using Scellecs.Morpeh.Elysium;
